@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Cajuru · Apresentação reservada</title>
+<meta name="description" content="Apresentação reservada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<style>
+/* ===== base (tokens Mata) ===== */
+:root{--mata:#1d3a2e;--mata2:#163027;--mata3:#122a20;--sky:#a8d0f5;--txt:#eef2ee;--txt2:#b9c9bf;--line:rgba(255,255,255,.18);--wrap:1120px;--ring:#1f7aff;--paper:#f3f5f1;--ink:#26352d;--ink2:#5b6b63;--rule:#d9e0da;--link:#2e6b52}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--mata);color:var(--txt);font:16px/1.5 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque",sans-serif;letter-spacing:-.02em;text-wrap:balance}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px;position:relative}
+section{padding:56px 0;position:relative}
+.topo{position:absolute;inset:0;pointer-events:none;background:rgba(255,255,255,.07);-webkit-mask:url(img/topo-relevo.svg) center/cover no-repeat;mask:url(img/topo-relevo.svg) center/cover no-repeat}
+.kicker{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;margin-bottom:10px;color:var(--sky)}
+.kicker::before{content:"";width:18px;height:2px;background:currentColor}
+.h2{font-size:clamp(30px,4.6vw,48px);line-height:1.04;font-weight:800;margin-bottom:12px;color:#fff}
+.h3{font-size:clamp(22px,2.6vw,30px);line-height:1.1;font-weight:800;color:#fff;margin-bottom:6px}
+.lead{color:#cad6cf;font-size:clamp(15px,1.6vw,18px);max-width:600px}
+.nw{white-space:nowrap}
+.src{color:var(--sky);font-size:12px;text-decoration:none;white-space:nowrap;font-weight:600}
+.note{font-size:12px;color:var(--txt2);margin-top:10px}
+.ic{width:22px;height:22px;color:var(--sky);flex:none}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}
+.reveal.on{opacity:1;transform:none}
+
+/* navegação por capítulos */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(18,42,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);transform:translateY(-100%);transition:transform .35s}
+.nav.show{transform:none}
+.nav .in{display:flex;align-items:center;gap:18px;max-width:var(--wrap);margin:0 auto;padding:0 20px;height:52px}
+.nav b{font:800 17px "Bricolage Grotesque";white-space:nowrap}
+.nav ul{list-style:none;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a{display:block;white-space:nowrap;text-decoration:none;font-size:13px;font-weight:600;color:var(--txt2);padding:6px 11px;border-radius:999px}
+.nav a.on{background:rgba(168,208,245,.15);color:var(--sky)}
+
+/* ===== I-1 · abertura (1A) ===== */
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes zoom{from{transform:scale(1.06)}to{transform:none}}
+.in1{animation:up .9s cubic-bezier(.2,.7,.2,1) .15s both}
+.in2{animation:up .9s cubic-bezier(.2,.7,.2,1) .35s both}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#cfe0d6;letter-spacing:.02em}
+.tag i{width:7px;height:7px;border-radius:50%;background:var(--sky);box-shadow:0 0 0 4px rgba(168,208,245,.18)}
+.ha{position:relative;height:min(100svh,920px);min-height:660px;overflow:hidden;background:linear-gradient(180deg,#1d3a2e 0%,#2c5048 22%,#7f9ea6 40%)}
+.ha .layer{position:absolute;left:0;right:0;bottom:0;top:30%;container-type:size;overflow:hidden}
+.ha .cover{position:absolute;left:50%;top:0;transform:translateX(-50%);width:max(100cqw,133.334cqh);height:max(75cqw,100cqh)}
+.ha .cover img{position:absolute;inset:0;width:100%;height:100%;-webkit-mask:linear-gradient(transparent 0,#000 16%);mask:linear-gradient(transparent 0,#000 16%);animation:zoom 14s ease-out both;transform-origin:50% 100%}
+.ha .txt{position:absolute;left:0;right:0;top:0;z-index:3;padding-top:28px}
+.ha h1{font-size:clamp(32px,4.9vw,62px);line-height:1.04;font-weight:800;color:#fff;max-width:880px;margin-top:14px}
+.ha h1 span{color:var(--sky)}
+.hpin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;opacity:0;animation:fade .7s ease-out both}
+.hpin span{font-size:12px;font-weight:600;color:#fff;background:rgba(18,42,32,.86);border:1px solid rgba(255,255,255,.35);padding:5px 10px;border-radius:8px;white-space:nowrap;line-height:1.25;text-align:center}
+.hpin span small{display:block;font-weight:400;color:var(--txt2);font-size:11px}
+.hpin::after{content:"";width:1.5px;height:34px;background:#fff}
+.hpin::before{content:"";position:absolute;bottom:-4px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.25)}
+.p1{left:70%;top:41%;animation-delay:1.2s}
+.p2{left:27%;top:37%;animation-delay:1.6s}
+.p3{left:68%;top:19%;animation-delay:2s}
+@media(max-width:799px){.ha .layer{top:33%}.p2{left:56%;top:82%}.p1{left:64%}.p3{left:60%}.ha .cover{transform:translateX(-56%)}}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px}
+.nums b{display:block;font:800 clamp(38px,5vw,56px)/1 "Bricolage Grotesque";letter-spacing:-.03em;color:#fff}
+.nums b small{font-size:.5em;letter-spacing:0}
+.nums span{font-size:13px;color:var(--txt2)}
+@media(min-width:800px){.nums{grid-template-columns:repeat(4,1fr)}}
+
+/* ===== I-2 · o que é (2A) ===== */
+.pat{position:relative;aspect-ratio:359/470;width:100%;border-radius:18px;overflow:hidden;margin:22px auto 0}
+.pat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.ann svg{position:absolute;inset:0;width:100%;height:100%}
+.ann .dot{fill:#fff}
+.ann .ld{stroke:#fff;stroke-width:1.2;fill:none;stroke-dasharray:140;stroke-dashoffset:140}
+.ann .lab{position:absolute;font-size:12px;font-weight:600;color:#fff;background:rgba(22,48,39,.85);border:1px solid rgba(255,255,255,.35);padding:5px 9px;border-radius:8px;line-height:1.25;opacity:0}
+.ann .lab small{display:block;font-weight:400;color:var(--txt2);font-size:11px}
+.ann.on .ld{animation:ld 1.2s ease-out forwards}.ann.on .l2{animation-delay:.5s}.ann.on .l3{animation-delay:1s}
+.ann.on .lab{animation:fadein .6s ease-out forwards}.ann.on .a1{animation-delay:.7s}.ann.on .a2{animation-delay:1.2s}.ann.on .a3{animation-delay:1.7s}
+@keyframes ld{to{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}
+.pat2{position:relative;width:100%;overflow:hidden;display:none}
+.pat2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pat2 .ld{stroke-width:2.6;stroke-dasharray:600;stroke-dashoffset:600}
+.pat2 .lab{margin-top:-19px;font-size:13px;padding:7px 11px}.pat2 .lab small{font-size:12px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.facts div{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.facts b{display:block;font:800 22px/1.1 "Bricolage Grotesque";color:#fff}
+.facts span{font-size:12px;color:var(--txt2)}
+@media(min-width:800px){
+ #oque{padding:0}
+ #oque .mob{display:none}
+ #oque .pat2{display:block}
+ #oque .panel{position:absolute;left:max(24px,calc((100vw - var(--wrap))/2));bottom:36px;width:430px;background:rgba(18,42,32,.88);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:16px;padding:26px}
+ #oque .panel .h2{font-size:38px}#oque .panel .lead{font-size:15px}
+}
+@media(max-width:799px){#oque .panel{display:none}}
+
+/* ===== I-3 · onde fica (mapa do inquilino) ===== */
+.mapsec{position:relative;height:min(92svh,820px);min-height:600px;padding:0;overflow:hidden}
+.mapsec .ml{position:absolute;inset:0}
+.mapsec .head{position:absolute;left:0;right:0;top:0;z-index:6;padding:40px 0 70px;background:linear-gradient(180deg,var(--mata) 0,var(--mata) 55%,rgba(29,58,46,0));pointer-events:none}
+.mapsec .foot{position:absolute;left:0;right:0;bottom:0;z-index:6;padding:50px 0 22px;background:linear-gradient(0deg,var(--mata) 0,var(--mata) 45%,rgba(29,58,46,0))}
+.mapsec .foot .wrap{display:flex;gap:8px;max-width:520px;margin-left:0}
+@media(min-width:1160px){.mapsec .foot .wrap{margin-left:calc((100vw - var(--wrap))/2)}}
+.btn{flex:1;text-align:center;border-radius:999px;padding:12px 10px;font-weight:600;font-size:14px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.b1{background:#fff;color:var(--mata)}.b2{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.chips{position:absolute;left:20px;bottom:116px;display:flex;flex-direction:column;gap:6px;z-index:5;pointer-events:none}
+@media(min-width:1160px){.chips{left:calc((100vw - var(--wrap))/2 + 20px)}}
+.chip{align-self:flex-start;background:rgba(22,48,39,.9);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:10px;padding:6px 10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.5s}
+.chip small{font-weight:400;color:var(--txt2);margin-left:6px}
+.chip.on{opacity:1;transform:none}
+.pin{width:18px;height:18px;border-radius:50%;background:var(--sky);border:3px solid #fff;animation:pr 2s infinite}
+@keyframes pr{0%{box-shadow:0 0 0 0 rgba(168,208,245,.7)}100%{box-shadow:0 0 0 18px rgba(168,208,245,0)}}
+.lbl{font:700 12px "Instrument Sans";color:#fff;background:rgba(22,48,39,.85);padding:3px 8px;border-radius:6px;white-space:nowrap;opacity:0;transition:.5s}
+.lbl.on{opacity:1}
+.maplibregl-ctrl-bottom-right{bottom:84px!important}
+.maplibregl-ctrl-attrib{font-size:10px!important}
+
+/* ===== I-4 · Plano Diretor (4C) ===== */
+.card{position:relative;background:#fff;border-radius:18px;overflow:hidden;width:100%}
+.card .map{position:relative;aspect-ratio:1;overflow:hidden}
+.card .map img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .map .m{position:absolute;inset:0}
+.ring{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:3px solid var(--ring);box-shadow:0 0 0 2px #fff,inset 0 0 0 2px #fff}
+.ring::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:3px solid var(--ring);animation:pulse 2s ease-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(3.2);opacity:0}}
+.card .num{position:absolute;left:12px;top:12px;background:var(--mata);color:#fff;font:800 13px "Bricolage Grotesque";padding:5px 10px;border-radius:999px}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;padding:12px 14px 4px;color:#23332b;font-size:12px}
+.leg span{display:flex;align-items:center;gap:6px}
+.leg i{width:16px;height:11px;border-radius:2px;flex:none}
+.leg i.ln{height:0;border-top:3px solid #e8262b;border-radius:0}
+.leg i.r{border:3px solid var(--ring);border-radius:50%;width:12px;height:12px}
+.msrc{padding:2px 14px 12px;color:#5b6b63;font-size:11px;line-height:1.35}
+.msrc a{color:#1f5fbf;text-decoration:none;font-weight:600;white-space:nowrap}
+.sc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.sc .card{box-shadow:0 12px 30px rgba(0,0,0,.3);display:flex;flex-direction:column}
+.sc .cap{padding:12px 14px 0;color:#16241d}
+.sc .cap b{display:block;font:800 17px/1.15 "Bricolage Grotesque";letter-spacing:-.01em}
+.sc .cap span{display:block;font-size:12.5px;color:#46574e;margin-top:4px;line-height:1.4}
+.sc .leg{margin-top:auto}
+@media(max-width:899px){
+ .sc{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:22px -20px 0;padding:0 20px 6px}
+ .sc::-webkit-scrollbar{display:none}
+ .sc .card{flex:0 0 84%;scroll-snap-align:center}
+}
+@media(min-width:900px){
+ .sc .card{opacity:0;transform:translateY(26px)}
+ .sc.in .card{animation:cin .5s cubic-bezier(.2,.7,.2,1) forwards}
+ .sc.in .card:nth-child(2){animation-delay:.15s}.sc.in .card:nth-child(3){animation-delay:.3s}.sc.in .card:nth-child(4){animation-delay:.45s}
+}
+@keyframes cin{to{opacity:1;transform:none}}
+.dots{display:none;justify-content:center;gap:6px;margin-top:12px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3)}
+.dots i.on{background:var(--sky)}
+@media(max-width:899px){.dots{display:flex}}
+
+/* ===== I-5 · já feito e pela frente (5C) ===== */
+.ph{position:relative;border-radius:16px;overflow:hidden}
+.ph img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.film{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;align-items:start}
+.film figure{position:relative;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.film figcaption{font-size:13px;color:var(--txt2);margin-top:8px}
+.film figcaption b{display:block;color:#fff;font:600 15px "Bricolage Grotesque"}
+.film figure:not(:last-child)::after{content:"→";position:absolute;right:-10px;top:calc(37.5% - 14px);transform:translateX(50%);width:28px;height:28px;border-radius:50%;background:var(--sky);color:var(--mata);font-weight:800;display:grid;place-items:center;z-index:2;font-size:15px}
+.film.on figure{opacity:1;transform:none}
+.film.on figure:nth-child(2){transition-delay:.25s}.film.on figure:nth-child(3){transition-delay:.5s}
+@media(max-width:899px){.film{grid-template-columns:1fr;gap:26px}.film figure:not(:last-child)::after{content:"↓";right:50%;top:auto;bottom:-27px}}
+.ruler{position:relative;margin-top:40px}
+.ruler .ev{background:rgba(22,48,39,.75);border:1px solid var(--line);border-radius:12px;padding:10px 12px;opacity:0;transition:opacity .5s,transform .5s}
+.ruler .ev.on{opacity:1}
+.ruler .ev em{display:block;font-style:normal;font-size:11px;font-weight:600;color:var(--sky)}
+.ruler .ev.fala em{color:#e9d9a8}
+.ruler .ev b{display:block;font:600 15px/1.2 "Bricolage Grotesque";color:#fff;margin:2px 0}
+.ruler .ev span{font-size:12px;color:var(--txt2)}
+@media(min-width:900px){
+ .ruler{height:700px}
+ .ruler .axis{position:absolute;left:0;right:0;top:350px;height:2px;background:rgba(255,255,255,.25)}
+ .ruler .fut{position:absolute;top:349px;height:0;border-top:2px dashed rgba(233,217,168,.7);background:var(--mata)}
+ .ruler .yr{position:absolute;top:358px;transform:translateX(-50%);font:800 12px "Bricolage Grotesque";color:var(--txt2);background:var(--mata);padding:0 4px}
+ .ruler .tick{position:absolute;top:345px;width:1px;height:12px;background:rgba(255,255,255,.3)}
+ .ruler .ev{position:absolute;width:156px;margin-left:-78px}
+ .ruler .ev.up{bottom:calc(350px + var(--o))}.ruler .ev.dn{top:calc(352px + var(--o))}
+ .ruler .ev::before{content:"";position:absolute;left:50%;width:1.5px;height:var(--o);background:rgba(255,255,255,.45)}
+ .ruler .ev.up::before{top:100%}.ruler .ev.dn::before{bottom:100%}
+ .ruler .ev .dot{position:absolute;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;border:2px solid var(--sky);background:var(--sky)}
+ .ruler .ev.up .dot{top:calc(100% + var(--o) - 6px)}.ruler .ev.dn .dot{bottom:calc(100% + var(--o) - 6px)}
+ .ruler .ev.ann .dot{background:var(--mata)}
+ .ruler .ev.fala .dot{background:var(--mata);border-color:#e9d9a8;border-style:dashed}
+}
+@media(max-width:899px){
+ .ruler{padding-left:56px}
+ .ruler .axis{position:absolute;left:38px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.25)}
+ .ruler .fut,.ruler .tick{display:none}
+ .ruler .yr{position:absolute;left:0;font:800 12px "Bricolage Grotesque";color:var(--txt2);transform:translateY(-50%)}
+ .ruler .ev{position:relative;margin-bottom:10px}
+ .ruler .ev .dot{position:absolute;left:-25px;top:14px;width:14px;height:14px;border-radius:50%;border:2px solid var(--sky);background:var(--sky)}
+ .ruler .ev.ann .dot{background:var(--mata)}
+ .ruler .ev.fala .dot{background:var(--mata);border-color:#e9d9a8;border-style:dashed}
+ .ruler .gap{height:var(--g)}
+}
+
+/* ===== I-6 · o que tem (6A) ===== */
+.ficha{display:grid;gap:12px;margin-top:26px}
+.grp{border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(22,48,39,.6)}
+.grp h3{display:flex;align-items:center;gap:10px;font:800 18px "Bricolage Grotesque";color:#fff;margin-bottom:8px}
+.grp ul{list-style:none}
+.grp li{padding:8px 0;border-top:1px dashed rgba(255,255,255,.18);font-size:14px;color:#dfe9e2;line-height:1.35}
+.grp li b{color:#fff;font-weight:600}
+.grp li small{display:block;font-size:12px;color:var(--txt2)}
+.ficha .grp{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.ficha.on .grp{opacity:1;transform:none}
+.ficha.on .grp:nth-child(2){transition-delay:.12s}.ficha.on .grp:nth-child(3){transition-delay:.24s}.ficha.on .grp:nth-child(4){transition-delay:.36s}
+.fhint,.fdots{display:none}
+@media(max-width:899px){
+ .ficha{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:12px -20px 0;padding:0 20px 4px;scroll-padding:0 20px}
+ .ficha::-webkit-scrollbar{display:none}
+ .ficha .grp{flex:0 0 80%;scroll-snap-align:start}
+ .fhint{display:flex;align-items:center;justify-content:space-between;margin-top:22px;font-size:13px;font-weight:600;color:var(--sky)}
+ .fhint span{color:var(--txt2);font-weight:500}
+ .fhint em{font-style:normal;display:inline-flex;align-items:center;gap:6px}
+ .fhint em i{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+ @keyframes nudge{0%,100%{transform:none}50%{transform:translateX(5px)}}
+ .fdots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+ .fdots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s}
+ .fdots b.on{width:20px;border-radius:4px;background:var(--sky)}
+}
+@media(min-width:900px){.ficha{grid-template-columns:repeat(4,1fr)}}
+.swipe{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:22px 20px 6px;max-width:var(--wrap);margin:0 auto}
+.swipe::-webkit-scrollbar{display:none}
+.swipe figure{flex:0 0 72%;scroll-snap-align:start}
+.swipe img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px}
+.swipe figcaption{font-size:13px;margin-top:8px;color:var(--txt2)}
+@media(min-width:900px){.swipe figure{flex:1 1 0}.swipe img{aspect-ratio:3/4}}
+
+/* ===== I-7 · como seguimos (7C) ===== */
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:16px;font-weight:600;font-size:16px;text-decoration:none;background:#fff;color:var(--mata);margin-bottom:10px;max-width:520px}
+.cta svg{width:20px;height:20px}
+.mchips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px}
+.mchip{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid var(--line);color:#dfe9e2}
+.mchip.now{background:#fff;color:var(--mata);border-color:#fff}
+.steps{list-style:none;display:grid;margin-top:30px;counter-reset:s}
+.steps li{position:relative;padding:0 0 26px 58px;counter-increment:s;opacity:0;transform:translateX(-10px);transition:opacity .5s,transform .5s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;border:2px solid var(--sky);display:grid;place-items:center;font:800 17px "Bricolage Grotesque";color:var(--sky)}
+.steps li:first-child::before{background:var(--sky);color:var(--mata)}
+.steps li::after{content:"";position:absolute;left:19px;top:44px;bottom:4px;width:2px;background:rgba(255,255,255,.2)}
+.steps li:last-child::after{display:none}
+.steps b{display:block;font:600 20px/1.2 "Bricolage Grotesque";color:#fff;padding-top:7px}
+.steps span{font-size:14px;color:var(--txt2)}
+.steps.on li{opacity:1;transform:none}.steps.on li:nth-child(2){transition-delay:.2s}.steps.on li:nth-child(3){transition-delay:.4s}
+.cgrid{display:grid;gap:20px}
+@media(min-width:900px){.cgrid{grid-template-columns:1.1fr 1fr;column-gap:70px;align-items:start}.steps{margin-top:0}.steps li{padding-bottom:34px}}
+.band{position:relative;height:min(70svh,620px);min-height:380px;overflow:hidden;padding:0}
+.band .track{position:absolute;inset:0;display:flex;transition:transform 1.1s cubic-bezier(.6,0,.2,1)}
+.band .track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover}
+.band .track img.on{animation:kb 5.5s linear both}
+@keyframes kb{from{transform:scale(1.04)}to{transform:scale(1.12)}}
+.band .sh2{position:absolute;inset:0;background:linear-gradient(180deg,var(--mata) 0,rgba(29,58,46,0) 22%,rgba(29,58,46,0) 78%,var(--paper) 100%)}
+.pips{position:absolute;bottom:22px;left:20px;right:20px;display:flex;gap:5px;z-index:3;max-width:var(--wrap);margin:0 auto}
+.pips i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden;position:relative}
+.pips i.on::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:left;animation:pip 4.5s linear both}
+.pips i.past{background:#fff}
+@keyframes pip{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ===== I-8 · rodapé (8A) ===== */
+footer{background:var(--paper);color:var(--ink);font-size:13px;padding:34px 0 50px}
+footer a{color:var(--link);text-decoration:none;font-weight:600}
+footer a:hover{text-decoration:underline}
+footer .logo{width:min(280px,78%)}
+footer .base{color:var(--ink2);margin-top:14px;max-width:640px;line-height:1.55}
+footer .base b{color:var(--ink);font-weight:600}
+footer h4{font:800 12px "Bricolage Grotesque";letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
+footer .cols{display:grid;gap:22px;margin-top:28px;padding-top:24px;border-top:1px solid var(--rule)}
+footer .cols ul{list-style:none}
+footer .cols li{padding:5px 0;line-height:1.4}
+footer .cols li small{display:block;color:var(--ink2);font-size:12px}
+footer .atop{display:grid;gap:10px}
+@media(min-width:900px){footer .cols{grid-template-columns:1.2fr 1fr 1fr}footer .atop{grid-template-columns:300px 1fr;column-gap:50px;align-items:end}footer .atop .logo{width:280px}footer .atop .base{margin:0}}
+
+/* movimento reduzido */
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.ann .lab,.film figure,.ruler .ev,.ficha .grp,.steps li,.sc .card,.hpin{opacity:1!important;transform:none!important}.ann .ld{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="i-patio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M4 20V9h7v11M11 14h9v6"/></symbol>
+ <symbol id="i-cama" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7M3 13h18v5M21 13a3 3 0 0 0-3-3h-7v3M7 11a1.5 1.5 0 1 0 0-.01"/></symbol>
+ <symbol id="i-raio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+ <symbol id="i-casa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5"/></symbol>
+ <symbol id="wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></symbol>
+</svg>
+
+<nav class="nav" id="nav"><div class="in"><b>Cajuru</b><ul>
+<li><a href="#oque">O que é</a></li><li><a href="#onde">Onde fica</a></li><li><a href="#regiao">Por que a região</a></li><li><a href="#tem">O que tem</a></li><li><a href="#segue">Como seguimos</a></li></ul></div></nav>
+
+<!-- I-1 · ABERTURA -->
+<header class="ha" id="top">
+  <div class="layer"><div class="cover">
+    <img src="img/aerea-14.jpg" alt="Vista aérea do Cajuru com o pátio, o alojamento, a casa e o entorno">
+    <div class="hpin p1"><span>Alojamento e casa</span></div>
+    <div class="hpin p2"><span>Pátios prontos<small>terraplenados e cascalhados</small></span></div>
+    <div class="hpin p3"><span>Operação industrial vizinha</span></div>
+  </div></div>
+  <div class="txt"><div class="wrap">
+    <div class="tag in1"><i></i>Apresentação reservada · Pouso Alegre, MG</div>
+    <h1 class="in2"><span class="nw">25.400 m²</span> dentro de um polo de crescimento <span>definido pelo Plano Diretor de Pouso Alegre.</span></h1>
+  </div></div>
+</header>
+<section style="padding:40px 0"><div class="topo"></div><div class="wrap">
+  <div class="nums">
+    <div><b>25.400</b><span>m² de área total</span></div>
+    <div><b>50</b><span>pessoas no alojamento</span></div>
+    <div><b>400 m</b><span>até a MG-290</span></div>
+    <div><b>6,6 <small>km</small></b><span>do centro (aprox.)</span></div>
+  </div>
+</div></section>
+
+<!-- I-2 · O QUE É -->
+<section id="oque">
+  <div class="wrap mob reveal">
+    <div class="kicker">O que é</div>
+    <h2 class="h2">Não é terreno vazio.</h2>
+    <p class="lead">Pátios prontos, alojamento para 50 pessoas e casa, ofertados hoje para locação.</p>
+    <div class="facts"><div><b>25.400 m²</b><span>área total</span></div><div><b>Locação</b><span>oferta atual</span></div></div>
+    <div class="pat ann">
+      <img src="img/aerea-08.jpg" alt="Vista de cima do pátio em L">
+      <svg viewBox="0 0 359 470" preserveAspectRatio="none">
+        <circle class="dot" cx="110" cy="262" r="4"/><path class="ld l1" d="M110 262 L60 215 L14 215"/>
+        <circle class="dot" cx="195" cy="155" r="4"/><path class="ld l2" d="M195 155 L240 92 L345 92"/>
+        <circle class="dot" cx="250" cy="300" r="4"/><path class="ld l3" d="M250 300 L272 382 L345 382"/>
+      </svg>
+      <div class="lab a1" style="left:3.9%;top:36.8%">Pátio em L<small>terraplenado e cascalhado</small></div>
+      <div class="lab a2" style="right:2.8%;top:10.6%">Alojamento e casa<small>50 pessoas · 9 quartos</small></div>
+      <div class="lab a3" style="right:2.8%;top:82.6%">Módulos de 3 a 6 mil m²<small>alugáveis em separado</small></div>
+    </div>
+  </div>
+  <div class="pat2 ann" style="aspect-ratio:1600/700"><img src="img/aerea-08.jpg" alt="Vista de cima dos pátios em L" style="object-position:50% 60%"><svg viewBox="0 300 1600 700" preserveAspectRatio="none"><circle class="dot" cx="705" cy="669" r="9"/><path class="ld l1" d="M705 669 L640 545 L560 545"/><circle class="dot" cx="922" cy="396" r="9"/><path class="ld l2" d="M922 396 L1000 335 L1170 335"/><circle class="dot" cx="1062" cy="766" r="9"/><path class="ld l3" d="M1062 766 L1130 870 L1240 870"/></svg><div class="lab a1" style="right:65%;top:35%">Pátio em L<small>terraplenado e cascalhado</small></div><div class="lab a2" style="left:73.1%;top:5%">Alojamento e casa<small>50 pessoas · 9 quartos</small></div><div class="lab a3" style="left:77.5%;top:81.4%">Módulos de 3 a 6 mil m²<small>alugáveis em separado</small></div></div>
+  <div class="panel">
+    <div class="kicker">O que é</div>
+    <h2 class="h2">Não é terreno vazio.</h2>
+    <p class="lead">Pátios prontos, alojamento para 50 pessoas e casa, ofertados hoje para locação.</p>
+    <div class="facts"><div><b>25.400 m²</b><span>área total</span></div><div><b>Locação</b><span>oferta atual</span></div></div>
+  </div>
+</section>
+
+<!-- I-3 · ONDE FICA -->
+<section class="mapsec" id="onde">
+  <div class="ml" id="map"></div><div class="chips" id="chips"></div>
+  <div class="head"><div class="wrap"><div class="kicker">Onde fica</div><h2 class="h2">Perto do centro e da <span class="nw">Fernão Dias</span>.</h2></div></div>
+  <div class="foot"><div class="wrap"><button class="btn b2" id="replay">↻ Ver de novo</button><a class="btn b1" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=-22.258,-45.978">Abrir no Maps</a></div></div>
+</section>
+
+<!-- I-4 · POR QUE A REGIÃO: PLANO DIRETOR -->
+<section id="regiao"><div class="topo"></div><div class="wrap">
+  <div class="kicker">Por que a região</div>
+  <h2 class="h2">O Plano Diretor coloca a área onde a cidade cresce.</h2>
+  <p class="lead">Quatro mapas oficiais da Lei 7.258/2026, com o imóvel marcado. Cada um com o link para conferir.</p>
+  <div class="sc" id="sc"></div>
+  <div class="dots" id="dots"></div>
+</div></section>
+
+<!-- I-5 · JÁ FEITO E PELA FRENTE -->
+<section id="entorno" style="padding-top:20px"><div class="topo"></div><div class="wrap">
+  <h2 class="h2">O entorno já mudou. E tem mais vindo.</h2>
+  <p class="lead">Na régua, cada marco no seu ano: três obras entregues desde 2019, dois anúncios em 2026 e o que vem pela frente.</p>
+  <div class="ruler" id="ruler"><div class="axis"></div></div>
+  <h3 class="h3" style="margin-top:46px">O imóvel também mudou.</h3>
+  <div class="film" id="film">
+    <figure><div class="ph"><img src="img/pptx-04-antes.jpg" alt="Pátio em terra vermelha com máquinas"></div><figcaption><b>Terraplenagem</b>pátio em terra, máquinas trabalhando</figcaption></figure>
+    <figure><div class="ph"><img src="img/pptx-10-antes.jpg" alt="Um módulo em terra e outro em cascalho"></div><figcaption><b>Cascalhamento</b>um módulo em terra, outro já cascalhado</figcaption></figure>
+    <figure><div class="ph"><img src="img/pptx-03-nucleo.jpg" alt="Pátio cascalhado em volta do alojamento"></div><figcaption><b>Pátio cascalhado</b>em volta do alojamento e da casa</figcaption></figure>
+  </div>
+  <p class="note">Fotos do proprietário durante a preparação do pátio, sem data exata.</p>
+</div></section>
+
+<!-- I-6 · O QUE TEM -->
+<section id="tem"><div class="topo"></div><div class="wrap">
+  <div class="kicker">O que tem</div>
+  <h2 class="h2">Estrutura pronta, no lugar.</h2>
+  <p class="lead">O que existe hoje no imóvel, em uma ficha.</p>
+  <div class="fhint"><span id="fcount">1 de 4 · Pátio</span><em>Arraste para o lado <i>→</i></em></div>
+  <div class="ficha" id="ficha">
+    <div class="grp"><h3><svg class="ic"><use href="#i-patio"/></svg>Pátio</h3><ul>
+      <li><b>Pátios em L</b> terraplenados e cascalhados</li>
+      <li><b>Módulos de 3 a 6 mil m²</b><small>alugáveis em separado</small></li>
+      <li><b>Pátios planos</b><small>compactação viável até para empilhadeira</small></li></ul></div>
+    <div class="grp"><h3><svg class="ic"><use href="#i-cama"/></svg>Alojamento</h3><ul>
+      <li><b>50 pessoas</b> em 9 quartos, 6 suítes</li>
+      <li><b>8 banheiros</b></li>
+      <li><b>2 cozinhas</b><small>uma industrial e uma pequena</small></li>
+      <li><b>Lavanderia</b> e <b>salão coberto</b></li></ul></div>
+    <div class="grp"><h3><svg class="ic"><use href="#i-raio"/></svg>Infraestrutura</h3><ul>
+      <li><b>Energia trifásica</b></li>
+      <li><b>Poço artesiano</b></li>
+      <li><b>Caseiro</b> morando no local</li>
+      <li><b>Área cercada</b></li>
+      <li><b>Estacionamento coberto</b><small>4 veículos grandes, mais pátio para máquinas</small></li></ul></div>
+    <div class="grp"><h3><svg class="ic"><use href="#i-casa"/></svg>Casa</h3><ul>
+      <li><b>Casa principal</b><small>trecho em dois pavimentos</small></li>
+      <li>Pode servir de <b>escritório ou gerência</b></li></ul></div>
+  </div>
+  <div class="fdots" id="fdots"><b class="on"></b><b></b><b></b><b></b></div>
+</div>
+<div class="swipe">
+  <figure><img src="img/aerea-12.jpg" alt="Pátio cascalhado ao lado da estrada" loading="lazy"><figcaption>Pátio</figcaption></figure>
+  <figure><img src="img/cozinha.jpg" alt="Cozinha industrial" loading="lazy"><figcaption>Cozinha industrial</figcaption></figure>
+  <figure><img src="img/salao.jpg" alt="Salão coberto" loading="lazy"><figcaption>Salão coberto</figcaption></figure>
+  <figure><img src="img/quarto.jpg" alt="Quarto" loading="lazy"><figcaption>Quarto</figcaption></figure>
+  <figure><img src="img/casa-fachada.jpg" alt="Casa principal" loading="lazy"><figcaption>Casa principal</figcaption></figure>
+</div>
+</section>
+
+<!-- I-7 · COMO SEGUIMOS -->
+<section id="segue"><div class="topo"></div><div class="wrap cgrid">
+  <div>
+    <div class="kicker">Como seguimos</div>
+    <h2 class="h2">Três passos daqui.</h2>
+    <p class="lead">Ofertado hoje para locação, e aberto a outras formas de negócio.</p>
+    <div class="mchips"><span class="mchip now">Locação · oferta atual</span><span class="mchip">Venda</span><span class="mchip">Sociedade</span><span class="mchip">Desenvolvimento</span></div>
+    <a class="cta" href="#" id="cta"><svg><use href="#wa"/></svg>Falar com o proprietário</a>
+  </div>
+  <ol class="steps" id="steps">
+    <li><b>Conversa com o proprietário</b><span>pelo WhatsApp ou por telefone</span></li>
+    <li><b>Visita ao imóvel</b><span>pátio, alojamento e casa, no local</span></li>
+    <li><b>Documentação e valores</b><span>apresentados na conversa, conforme o caminho escolhido</span></li>
+  </ol>
+</div></section>
+<section class="band" id="band">
+  <div class="track">
+    <img src="img/aerea-14.jpg" alt="" loading="lazy"><img src="img/pptx-03-nucleo.jpg" alt="" loading="lazy"><img src="img/casa-fachada.jpg" alt="" loading="lazy"><img src="img/aerea-12.jpg" alt="" loading="lazy"><img src="img/chao-casa.jpg" alt="" loading="lazy">
+  </div>
+  <div class="pips"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="sh2"></div>
+</section>
+
+<!-- I-8 · RODAPÉ -->
+<footer><div class="wrap">
+  <div class="atop">
+    <img class="logo" src="img/logo-copaiba.png" alt="Fazenda Copaíba · ASG Agro Imobiliário">
+    <p class="base"><b>Cajuru</b> · Estrada do Pântano · Pouso Alegre/MG<br>Informações de nov/2026 · valores sob consulta · distâncias aproximadas por estrada · apresentação reservada.</p>
+  </div>
+  <div class="cols">
+    <div><h4>Plano Diretor</h4><ul>
+      <li><a target="_blank" rel="noopener" href="https://cmpousoalegre.gwlegis.com.br/legislacao/10467">Lei 7.258/2026 ↗</a><small>Plano Diretor de Pouso Alegre</small></li>
+      <li>Mapas oficiais: <a target="_blank" rel="noopener" href="https://cmpousoalegre.gwlegis.com.br/arquivo/69e906f225f44.pdf">1</a> · <a target="_blank" rel="noopener" href="https://cmpousoalegre.gwlegis.com.br/arquivo/69e9070eaf07f.pdf">2</a> · <a target="_blank" rel="noopener" href="https://cmpousoalegre.gwlegis.com.br/arquivo/69e908054dce3.pdf">4</a> · <a target="_blank" rel="noopener" href="https://cmpousoalegre.gwlegis.com.br/arquivo/69e908d9e34f2.pdf">7A</a><small>a marcação do imóvel nos recortes é aproximada</small></li></ul></div>
+    <div><h4>Entorno</h4><ul>
+      <li><a target="_blank" rel="noopener" href="https://terradomandu.com.br/index.php/2019/11/25/distrito-sao-jose-do-pantano-recebe-eventos-de-inauguracao-de-pavimentacao-de-estrada/">Asfalto da Estrada do Pântano ↗</a><small>Terra do Mandu · nov/2019</small></li>
+      <li><a target="_blank" rel="noopener" href="https://redemoinho24.com/pouso-alegre-d74/prefeitura-inaugura-unidade-de-saude-no-cajuru-e-faz-homenagem-a-doador-da-area/">UBS no bairro Cajuru ↗</a><small>Rede Moinho 24 · mai/2021</small></li>
+      <li><a target="_blank" rel="noopener" href="https://terradomandu.com.br/index.php/2025/05/23/ponte-que-liga-os-bairros-cajuru-e-imbuia-e-reconstruida-e-liberada/">Ponte Cajuru–Imbuia ↗</a><small>Terra do Mandu · mai/2025</small></li>
+      <li><a target="_blank" rel="noopener" href="https://terradomandu.com.br/index.php/2026/04/07/governador-e-prefeito-anunciam-construcao-de-trevo-na-entrada-do-pantano-na-mg-290/">Trevo na MG-290 e duplicação da ponte ↗</a><small>Terra do Mandu · abr/2026 · anunciados</small></li></ul></div>
+    <div><h4>Mapas, fotos e números</h4><ul>
+      <li>Satélite: Esri, Maxar, Earthstar Geographics<small>imagem anterior à preparação do pátio</small></li>
+      <li>Rotas e distâncias: OpenStreetMap / OSRM<small>aproximadas, por estrada</small></li>
+      <li>Fotos aéreas de set/2026 e fotos do proprietário<small>as da preparação do pátio sem data exata</small></li>
+      <li>Dados do imóvel informados pelo proprietário</li></ul></div>
+  </div>
+</div></footer>
+
+<script>
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DESK=matchMedia('(min-width:900px)').matches;
+const once=(el,fn,th=.4)=>{if(!el)return;const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fn(e.target);io.unobserve(e.target)}}),{threshold:th});io.observe(el)};
+function seq(sel,gap=450,th=.5){let next=0;const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);const t=Math.max(0,next-performance.now());next=performance.now()+t+gap;setTimeout(()=>e.target.classList.add('on'),t)}}),{threshold:th});document.querySelectorAll(sel).forEach(x=>io.observe(x))}
+
+// navegação: aparece depois da abertura e marca o capítulo atual
+const nav=document.getElementById('nav'),links=[...nav.querySelectorAll('a')];
+new IntersectionObserver(([e])=>nav.classList.toggle('show',!e.isIntersecting),{threshold:.15}).observe(document.getElementById('top'));
+const chap={oque:'oque',onde:'onde',regiao:'regiao',entorno:'regiao',tem:'tem',segue:'segue',band:'segue'};
+const secIO=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const id=chap[e.target.id];links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));const on=nav.querySelector('a.on'),ul=nav.querySelector('ul');if(on)ul.scrollTo({left:on.offsetLeft-ul.clientWidth/2+on.clientWidth/2,behavior:'smooth'})}),{rootMargin:'-45% 0px -50% 0px'});
+Object.keys(chap).forEach(id=>{const s=document.getElementById(id);if(s)secIO.observe(s)});
+
+// I-2
+document.querySelectorAll('.reveal').forEach(el=>once(el,t=>t.classList.add('on'),.2));
+document.querySelectorAll('.ann').forEach(a=>once(a,t=>t.classList.add('on'),.4));
+
+// I-3 · mapa animado (o mesmo do inquilino)
+// mapa animado (satélite, travado)
+const P=[-45.978,-22.258],R={};let m,run=0,labels={};
+const PAD={top:190,bottom:250,left:44,right:44};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function az(a,b){const r=Math.PI/180,y=Math.sin((b[0]-a[0])*r)*Math.cos(b[1]*r),x=Math.cos(a[1]*r)*Math.sin(b[1]*r)-Math.sin(a[1]*r)*Math.cos(b[1]*r)*Math.cos((b[0]-a[0])*r);return Math.atan2(y,x)/r}
+function nearest(cs){let best=cs[0],bd=1e9;cs.forEach(c=>{const d=(c[0]-P[0])**2+(c[1]-P[1])**2;if(d<bd){bd=d;best=c}});return best}
+function bounds(pts){const b=new maplibregl.LngLatBounds(pts[0],pts[0]);pts.forEach(p=>b.extend(p));return b}
+const steps=[{k:'mg',label:'MG-290',chip:'400 m da MG-290',small:''},{k:'centro',label:'Centro',chip:'Centro de Pouso Alegre',small:'aprox. 6,6 km'},{k:'fd',label:'Fernão Dias',chip:'Rodovia Fernão Dias',small:'aprox. 15 km'}];
+async function draw(feats,coords,ms){const t0=performance.now();return new Promise(res=>{function f(t){const p=Math.min(1,(t-t0)/ms),n=Math.max(2,Math.round(coords.length*p));m.getSource('r').setData({type:'FeatureCollection',features:[...feats,{type:'Feature',geometry:{type:'LineString',coordinates:coords.slice(0,n)}}]});if(p<1)setTimeout(()=>f(performance.now()),16);else res()}f(performance.now())})}
+function label(k,txt,ll,opt={}){const t=document.createElement('div');t.className='lbl';t.textContent=txt;labels[k]=new maplibregl.Marker({element:t,offset:[0,-14],...opt}).setLngLat(ll).addTo(m);setTimeout(()=>t.classList.add('on'),30)}
+async function play(){
+ const my=++run,ci=document.getElementById('chips');ci.innerHTML='';Object.values(labels).forEach(x=>x.remove());labels={};
+ m.getSource('r').setData({type:'FeatureCollection',features:[]});
+ m.jumpTo({center:P,zoom:16.4,pitch:35,bearing:az(P,nearest(R.mg))});await sleep(700);
+ const done=[];
+ for(const s of steps){ if(my!==run)return;
+  if(s.k!=='mg'&&labels.mg){labels.mg.remove();delete labels.mg}
+  const c=R[s.k],far=s.k==='mg'?nearest(c):c[c.length-1];
+  m.fitBounds(bounds([P,...(s.k==='mg'?[]:c),far]),{padding:{...PAD,bottom:PAD.bottom+34*done.length},bearing:az(P,far),pitch:s.k==='mg'?35:(s.k==='centro'?20:0),duration:s.k==='mg'?1400:1800,maxZoom:16});
+  await sleep(s.k==='mg'?1400:1700);
+  await draw(done,c,s.k==='mg'?1400:2200);done.push({type:'Feature',geometry:{type:'LineString',coordinates:c}});
+  label(s.k,s.label,s.k==='mg'?nearest(c):c[c.length-1]);
+  const ch=document.createElement('div');ch.className='chip';ch.innerHTML=s.chip+(s.small?'<small>'+s.small+'</small>':'');ci.appendChild(ch);setTimeout(()=>ch.classList.add('on'),30);
+  await sleep(900);
+ }
+ if(my!==run)return;
+ m.fitBounds(bounds([P,...R.centro,...R.fd]),{padding:{...PAD,bottom:PAD.bottom+110},pitch:0,bearing:az(P,R.fd[R.fd.length-1]),duration:1800});
+ m.once('moveend',()=>{if(my!==run)return;const seg=R.mg,pp=m.project(P);let best=seg[0],bd=-1;
+  seg.forEach(c=>{const q=m.project(c),d=Math.hypot(q.x-pp.x,q.y-pp.y);if(q.y>pp.y-8&&d>bd){bd=d;best=c}});
+  const q=m.project(best),side=q.x<pp.x?'right':'left';label('mg','MG-290',best,{anchor:side,offset:[side==='left'?8:-8,0]})});
+}
+m=new maplibregl.Map({container:'map',interactive:false,attributionControl:{compact:true},center:P,zoom:16.4,pitch:35,
+ style:{version:8,sources:{sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Imagem: Esri, Maxar, Earthstar Geographics'}},layers:[{id:'s',type:'raster',source:'sat',paint:{'raster-saturation':-.15}}]}});
+m.on('load',async()=>{
+ m.addSource('r',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+ m.addLayer({id:'rc',type:'line',source:'r',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#16211c','line-width':8,'line-opacity':.55}});
+ m.addLayer({id:'rl',type:'line',source:'r',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'#a8d0f5','line-width':4}});
+ const el=document.createElement('div');el.className='pin';new maplibregl.Marker({element:el}).setLngLat(P).addTo(m);
+ const t=document.createElement('div');t.className='lbl on';t.textContent='Cajuru';new maplibregl.Marker({element:t,offset:[0,-22]}).setLngLat(P).addTo(m);
+ Object.assign(R,await fetch('data/rotas.json').then(r=>r.json()));
+ m.jumpTo({center:P,zoom:16.4,pitch:35,bearing:az(P,nearest(R.mg))});
+ once(document.getElementById('onde'),()=>play(),.55);
+});
+document.getElementById('replay').onclick=()=>play();
+
+// I-4 · quatro cartas do Plano Diretor
+const LAW='Plano Diretor de Pouso Alegre · Lei 7.258/2026';
+const S=[
+ {n:'01',t:'Dentro do perímetro urbano',d:'Pela lei, a área está dentro da cidade de Pouso Alegre.',img:'img/pd-mapa1.png',pos:'0% 50%',x:41.6,y:34.3,leg:[['ln','','Perímetro urbano']],src:'Mapa 1 · Perímetro Urbano',url:'https://cmpousoalegre.gwlegis.com.br/arquivo/69e906f225f44.pdf'},
+ {n:'02',t:'Transição urbana, no limite da área industrial',d:'Macrozona de Desenvolvimento Urbano, na Macroárea de Transição Urbana, no limite com a Macroárea de Industrialização e Desenvolvimento Econômico.',img:'img/pd-mapa2.png',pos:'50% 50%',x:50,y:50,leg:[['','background:repeating-linear-gradient(135deg,#fff6b8 0 3px,#d9cf7a 3px 4px)','Transição Urbana'],['','background:repeating-linear-gradient(135deg,#fbc66f 0 3px,#c98f3a 3px 4px)','Industrialização e Desenv. Econômico']],src:'Mapa 2 · Macrozoneamento',url:'https://cmpousoalegre.gwlegis.com.br/arquivo/69e9070eaf07f.pdf'},
+ {n:'03',t:'Zona de Expansão Urbana',d:'Zoneamento ZEU, com os parâmetros da zona mista ZM2 pela Lei 7.258/2026.',img:'img/pd-mapa4.png',pos:'50% 50%',x:50,y:50,leg:[['','background:repeating-linear-gradient(135deg,#fff 0 3px,#1aa0d8 3px 6px)','Zona de Expansão Urbana']],src:'Mapa 4 · Zoneamento Urbano',url:'https://cmpousoalegre.gwlegis.com.br/arquivo/69e908054dce3.pdf'},
+ {n:'04',t:'Polo Estratégico “Estrada do Pantano”',d:'Um dos 4 Polos Estratégicos de Desenvolvimento Econômico do município.',img:'img/pd-mapa7a.png',pos:'50% 50%',x:50,y:50,leg:[['','background:#6e2a2a;opacity:.85','Polo Estrada do Pantano']],src:'Mapa 7A · Polos Estratégicos de Desenvolvimento Econômico',url:'https://cmpousoalegre.gwlegis.com.br/arquivo/69e908d9e34f2.pdf'}
+];
+(()=>{const sc=document.getElementById('sc'),dots=document.getElementById('dots');
+ sc.innerHTML=S.map(s=>`<figure class="card"><div class="map"><div class="m"><img src="${s.img}" style="object-position:${s.pos}" alt="Recorte do ${s.src} com o imóvel marcado" loading="lazy"><div class="ring" style="left:${s.x}%;top:${s.y}%"></div></div><span class="num">${s.n}</span></div><div class="cap"><b>${s.t}</b><span>${s.d}</span></div><div class="leg">${s.leg.map(([c,st,l])=>`<span><i class="${c}" style="${st}"></i>${l}</span>`).join('')}<span><i class="r"></i>Imóvel (marcação aprox.)</span></div><figcaption class="msrc">${s.src} · ${LAW} · <a href="${s.url}" target="_blank" rel="noopener">ver mapa oficial ↗</a></figcaption></figure>`).join('');
+ once(sc,t=>t.classList.add('in'),.25);
+ dots.innerHTML=S.map((_,i)=>`<i class="${i==0?'on':''}"></i>`).join('');
+ sc.addEventListener('scroll',()=>{const i=Math.round(sc.scrollLeft/(sc.children[0].offsetWidth+14));[...dots.children].forEach((d,j)=>d.classList.toggle('on',j==i))},{passive:true});
+})();
+
+// I-5 · régua dos anos
+const U1='https://terradomandu.com.br/index.php/2019/11/25/distrito-sao-jose-do-pantano-recebe-eventos-de-inauguracao-de-pavimentacao-de-estrada/',
+U2='https://redemoinho24.com/pouso-alegre-d74/prefeitura-inaugura-unidade-de-saude-no-cajuru-e-faz-homenagem-a-doador-da-area/',
+U3='https://terradomandu.com.br/index.php/2025/05/23/ponte-que-liga-os-bairros-cajuru-e-imbuia-e-reconstruida-e-liberada/',
+U4='https://terradomandu.com.br/index.php/2026/04/07/governador-e-prefeito-anunciam-construcao-de-trevo-na-entrada-do-pantano-na-mg-290/';
+const E=[
+ {k:'done',w:'2019',st:'concluída',t:'Estrada do Pântano asfaltada',d:'14 km entre a MG-290 e o distrito do Pantano',u:U1,y:2019.8},
+ {k:'done',w:'mai/2021',st:'concluída',t:'UBS no bairro Cajuru',d:'unidade básica de saúde da Prefeitura',u:U2,y:2021.4},
+ {k:'done',w:'mai/2025',st:'concluída',t:'Ponte Cajuru–Imbuia reconstruída',d:'em concreto, no lugar da ponte de madeira',u:U3,y:2025.4},
+ {k:'ann',w:'abr/2026',st:'anunciado',t:'Trevo na MG‑290, no acesso ao imóvel',d:'Governo de MG e Prefeitura',u:U4,y:2026.27},
+ {k:'ann',w:'abr/2026',st:'anunciado',t:'Duplicação da ponte do Pantano',d:'perto da entrada do distrito',u:U4,y:2026.27},
+ {k:'fala',w:'pela frente',t:'Nova ponte e avenida na região',d:'com verba já aprovada',y:2027.3},
+ {k:'fala',w:'pela frente',t:'Ponte e trevo ligando ao Cajuru',d:'projeto aprovado, saindo da área das festas do peão',y:2027.3}
+];
+(()=>{const fonte=e=>e.u?` <a class="src" target="_blank" rel="noopener" href="${e.u}">fonte ↗</a>`:'';
+ const head=e=>e.k=='fala'?'pela frente':`${e.w} · ${e.st}`;
+ const card=(e,cls,style)=>`<div class="ev ${e.k} ${cls}" style="${style}"><span class="dot"></span><em>${head(e)}</em><b>${e.t}</b><span>${e.d}${fonte(e)}</span></div>`;
+ const r=document.getElementById('ruler'),Y0=2019,Y1=2028,X=y=>((y-Y0)/(Y1-Y0)*100);
+ let h='<div class="axis"></div>';
+ if(DESK){
+  for(let y=Y0;y<=2026;y++)h+=`<div class="tick" style="left:${X(y)}%"></div><div class="yr" style="left:${X(y)}%">${y}</div>`;
+  h+=`<div class="fut" style="left:${X(2026.5)}%;right:0"></div>`;
+  const lay=[['up',26],['dn',40],['up',26],['dn',40],['up',196],['dn',196],['up',26]];
+  E.forEach((e,i)=>{const [ud,o]=lay[i];h+=card(e,ud,`left:${X(e.y)}%;--o:${o}px`)});
+ }else{
+  let prev=Y0;E.forEach((e,i)=>{const g=Math.max(0,(e.y-prev))*34;prev=e.y;h+=`<div class="gap" style="--g:${i==0?0:g}px"></div>`+card(e,'','')});
+ }
+ r.innerHTML=h;
+ if(!DESK)r.querySelectorAll('.ev').forEach((ev,i)=>{const e=E[i];if(i>0&&(Math.floor(E[i-1].y)==Math.floor(e.y)&&e.k!='fala'||E[i-1].k=='fala'&&e.k=='fala'))return;const t=document.createElement('div');t.className='yr';t.textContent=e.k=='fala'?'↓':String(Math.floor(e.y));t.style.top=(ev.offsetTop+21)+'px';r.appendChild(t)});
+ seq('#ruler .ev',320,.6);
+ once(document.getElementById('film'),t=>t.classList.add('on'),.2);
+})();
+
+// I-6 · ficha (carrossel no celular)
+once(document.getElementById('ficha'),t=>{t.classList.add('on');
+ if(!DESK&&!RM)setTimeout(()=>{t.scrollTo({left:70,behavior:'smooth'});setTimeout(()=>t.scrollTo({left:0,behavior:'smooth'}),650)},900)},.3);
+(()=>{const f=document.getElementById('ficha'),d=[...document.querySelectorAll('#fdots b')],c=document.getElementById('fcount'),n=['Pátio','Alojamento','Infraestrutura','Casa'];
+ f.addEventListener('scroll',()=>{const w=f.children[0].offsetWidth+10;const i=Math.min(3,Math.round(f.scrollLeft/w));d.forEach((x,j)=>x.classList.toggle('on',j==i));c.textContent=(i+1)+' de 4 · '+n[i]},{passive:true})})();
+
+// I-7 · passos e fotos passando
+once(document.getElementById('steps'),t=>t.classList.add('on'),.3);
+(()=>{const c=document.getElementById('band'),tr=c.querySelector('.track'),im=[...tr.children],pp=[...c.querySelectorAll('.pips i')];let i=0;
+ function go(n){i=n%im.length;tr.style.transform=`translateX(${-100*i}%)`;im.forEach((x,j)=>x.classList.toggle('on',j===i));pp.forEach((p,j)=>{p.classList.toggle('on',j===i);p.classList.toggle('past',j<i)})}
+ go(0);if(!RM)setInterval(()=>go(i+1),4500)})();
+</script>
+</body>
+</html>
