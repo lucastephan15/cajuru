@@ -409,12 +409,12 @@ footer .atop{display:grid;gap:10px}
   </div>
   <div class="fdots" id="fdots"><b class="on"></b><b></b><b></b><b></b></div>
 </div>
-<div class="swipe">
-  <figure><img src="img/aerea-12.jpg" alt="Pátio cascalhado ao lado da estrada" loading="lazy"><figcaption>Pátio</figcaption></figure>
-  <figure><img src="img/cozinha.jpg" alt="Cozinha industrial" loading="lazy"><figcaption>Cozinha industrial</figcaption></figure>
-  <figure><img src="img/salao.jpg" alt="Salão coberto" loading="lazy"><figcaption>Salão coberto</figcaption></figure>
-  <figure><img src="img/quarto.jpg" alt="Quarto" loading="lazy"><figcaption>Quarto</figcaption></figure>
-  <figure><img src="img/casa-fachada.jpg" alt="Casa principal" loading="lazy"><figcaption>Casa principal</figcaption></figure>
+<div class="swipe" id="galeria">
+  <figure data-gal="pat"><img src="img/aerea-12.jpg" alt="Pátio cascalhado ao lado da estrada" loading="lazy"><figcaption>Pátio</figcaption></figure>
+  <figure data-gal="coz"><img src="img/cozinha.jpg" alt="Cozinha industrial" loading="lazy"><figcaption>Cozinha industrial</figcaption></figure>
+  <figure data-gal="sal"><img src="img/salao.jpg" alt="Salão coberto" loading="lazy"><figcaption>Salão coberto</figcaption></figure>
+  <figure data-gal="qua"><img src="img/quarto.jpg" alt="Quarto" loading="lazy"><figcaption>Quarto</figcaption></figure>
+  <figure data-gal="casa"><img src="img/casa-fachada.jpg" alt="Casa principal" loading="lazy"><figcaption>Casa principal</figcaption></figure>
 </div>
 </section>
 
@@ -587,5 +587,6 @@ once(document.getElementById('steps'),t=>t.classList.add('on'),.3);
  function go(n){i=n%im.length;tr.style.transform=`translateX(${-100*i}%)`;im.forEach((x,j)=>x.classList.toggle('on',j===i));pp.forEach((p,j)=>{p.classList.toggle('on',j===i);p.classList.toggle('past',j<i)})}
  go(0);if(!RM)setInterval(()=>go(i+1),4500)})();
 </script>
+<script src="galeria.js"></script>
 </body>
 </html>

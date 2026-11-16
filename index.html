@@ -56,6 +56,12 @@ section{padding:56px 0;position:relative}
 @keyframes groundin{from{opacity:0}to{opacity:1}}
 @media(max-width:799px){.arc.d{display:none}.arc.m{display:block}}
 @keyframes paintin{from{opacity:0;transform:translateY(40px) scale(.94)}to{opacity:1;transform:none}}
+/* abertura do celular: foto vertical #08, vista alta (D-60) */
+.hm-layer{display:none}
+.hm-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask:linear-gradient(transparent 0,#000 14%);mask:linear-gradient(transparent 0,#000 14%)}
+.hm-arc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hm-arc text{font:800 200px "Bricolage Grotesque";letter-spacing:-2px;fill:rgba(255,255,255,.92);filter:drop-shadow(0 3px 4px rgba(0,0,0,.25));animation:groundin 1.6s cubic-bezier(.2,.7,.2,1) .4s both}
+@media(max-width:799px){.hero.hm .layer:not(.hm-layer){display:none}.hero.hm .hm-layer{display:block}}
 .hero .txt{position:absolute;left:0;right:0;top:0;z-index:3;padding-top:22px}
 .hero .loc{font-size:12px;font-weight:600;color:#cfe0d6;margin-bottom:6px}
 .hero h1{font-size:clamp(34px,5.6vw,64px);line-height:1.02;font-weight:800;color:#fff;max-width:760px}
@@ -282,12 +288,13 @@ body.eC .evC{display:block}
 <li><a href="#patio">Pátio</a></li><li><a href="#alojamento">Alojamento</a></li><li><a href="#infra">Infraestrutura</a></li><li><a href="#onde">Onde fica</a></li><li><a href="#acesso">Acesso</a></li><li><a href="#visite">Visite</a></li></ul></div></nav>
 
 <!-- 0 · ABERTURA -->
-<header class="hero" id="top">
+<header class="hero hm" id="top">
   <div class="layer"><div class="cover">
     <img src="img/aerea-13.jpg" alt="Vista aérea do Cajuru: pátio em L em volta do alojamento e da casa">
     <svg class="arc d" viewBox="0 0 1600 1200" preserveAspectRatio="none" aria-hidden="true"><defs><path id="arcp" d="M420 340 Q820 140 1220 340"/></defs><text><textPath href="#arcp" startOffset="50%" text-anchor="middle">Cajuru</textPath></text></svg>
-    <svg class="arc m" viewBox="0 0 1600 1200" preserveAspectRatio="none" aria-hidden="true"><defs><path id="arcm" d="M500 684 Q825 862 1150 684"/></defs><g transform="matrix(1 0 0 .62 0 281)"><text><textPath href="#arcm" startOffset="50%" text-anchor="middle">Cajuru</textPath></text></g></svg>
+    <svg class="arc m" hidden viewBox="0 0 1600 1200" preserveAspectRatio="none" aria-hidden="true"><defs><path id="arcm" d="M500 684 Q825 862 1150 684"/></defs><g transform="matrix(1 0 0 .62 0 281)"><text><textPath href="#arcm" startOffset="50%" text-anchor="middle">Cajuru</textPath></text></g></svg>
   </div></div>
+  <div class="layer hm-layer"><img class="hm-img" src="img/hero-m.jpg" alt="Vista aérea do Cajuru: pátio em L em volta do alojamento e da casa"><svg class="hm-arc" viewBox="0 0 1080 1800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><text text-anchor="middle" transform="translate(500 1075) rotate(13) scale(1 .72)">Cajuru</text></svg></div>
   <div class="txt"><div class="wrap"><div class="loc">Pouso Alegre · MG</div><h1>Pátio e alojamento prontos, <span>a <span class="nw">400 m</span> da <span class="nw">MG-290</span>.</span></h1></div></div>
 </header>
 
@@ -356,10 +363,10 @@ body.eC .evC{display:block}
   </div>
 </div></section>
 <div class="swipe">
-  <figure><img src="img/cozinha.jpg" alt="" loading="lazy"><figcaption><b>Cozinha industrial</b>e mais uma cozinha pequena</figcaption></figure>
-  <figure><img src="img/salao.jpg" alt="" loading="lazy"><figcaption><b>Salão coberto</b>estrutura de madeira, piso de pedra</figcaption></figure>
-  <figure><img src="img/quarto.jpg" alt="" loading="lazy"><figcaption><b>Quartos</b>9 quartos, 6 deles suítes</figcaption></figure>
-  <figure><img src="img/casa-superior.jpg" alt="" loading="lazy"><figcaption><b>Casa principal</b>dois pavimentos, pode servir de escritório</figcaption></figure>
+  <figure data-gal="coz"><img src="img/cozinha.jpg" alt="" loading="lazy"><figcaption><b>Cozinha industrial</b>e mais uma cozinha pequena</figcaption></figure>
+  <figure data-gal="sal"><img src="img/salao.jpg" alt="" loading="lazy"><figcaption><b>Salão coberto</b>estrutura de madeira, piso de pedra</figcaption></figure>
+  <figure data-gal="qua"><img src="img/quarto.jpg" alt="" loading="lazy"><figcaption><b>Quartos</b>9 quartos, 6 deles suítes</figcaption></figure>
+  <figure data-gal="casa"><img src="img/casa-superior.jpg" alt="" loading="lazy"><figcaption><b>Casa principal</b>dois pavimentos, pode servir de escritório</figcaption></figure>
 </div>
 
 <!-- 4 · INFRAESTRUTURA -->
@@ -517,5 +524,6 @@ m.on('load',async()=>{
 });
 document.getElementById('replay').onclick=()=>play();
 </script>
+<script src="galeria.js"></script>
 </body>
 </html>
