@@ -68,7 +68,8 @@ section{padding:56px 0;position:relative}
 .p1{left:70%;top:41%;animation-delay:1.2s}
 .p2{left:27%;top:37%;animation-delay:1.6s}
 .p3{left:68%;top:19%;animation-delay:2s}
-@media(max-width:799px){.ha .layer{top:33%}.p2{left:56%;top:82%}.p1{left:64%}.p3{left:60%}.ha .cover{transform:translateX(-56%)}}
+.p4{left:39.1%;top:45.6%;animation-delay:2.4s}
+@media(max-width:799px){.ha .layer{top:33%}.p2{left:56%;top:82%}.p1{left:64%}.p3{left:60%}.ha .cover{transform:translateX(-56%)}.p4 span{position:relative;left:34px}}
 .nums{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px}
 .nums b{display:block;font:800 clamp(38px,5vw,56px)/1 "Bricolage Grotesque";letter-spacing:-.03em;color:#fff}
 .nums b small{font-size:.5em;letter-spacing:0}
@@ -83,8 +84,8 @@ section{padding:56px 0;position:relative}
 .ann .ld{stroke:#fff;stroke-width:1.2;fill:none;stroke-dasharray:140;stroke-dashoffset:140}
 .ann .lab{position:absolute;font-size:12px;font-weight:600;color:#fff;background:rgba(22,48,39,.85);border:1px solid rgba(255,255,255,.35);padding:5px 9px;border-radius:8px;line-height:1.25;opacity:0}
 .ann .lab small{display:block;font-weight:400;color:var(--txt2);font-size:11px}
-.ann.on .ld{animation:ld 1.2s ease-out forwards}.ann.on .l2{animation-delay:.5s}.ann.on .l3{animation-delay:1s}
-.ann.on .lab{animation:fadein .6s ease-out forwards}.ann.on .a1{animation-delay:.7s}.ann.on .a2{animation-delay:1.2s}.ann.on .a3{animation-delay:1.7s}
+.ann.on .ld{animation:ld 1.2s ease-out forwards}.ann.on .l2{animation-delay:.5s}.ann.on .l3{animation-delay:1s}.ann.on .l4{animation-delay:1.5s}
+.ann.on .lab{animation:fadein .6s ease-out forwards}.ann.on .a1{animation-delay:.7s}.ann.on .a2{animation-delay:1.2s}.ann.on .a3{animation-delay:1.7s}.ann.on .a4{animation-delay:2.2s}
 @keyframes ld{to{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}
 .pat2{position:relative;width:100%;overflow:hidden;display:none}
 .pat2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -285,7 +286,7 @@ footer .atop{display:grid;gap:10px}
 @media(min-width:900px){footer .cols{grid-template-columns:1.2fr 1fr 1fr}footer .atop{grid-template-columns:300px 1fr;column-gap:50px;align-items:end}footer .atop .logo{width:280px}footer .atop .base{margin:0}}
 
 /* movimento reduzido */
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.ann .lab,.film figure,.ruler .ev,.ficha .grp,.steps li,.sc .card,.hpin{opacity:1!important;transform:none!important}.ann .ld{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.ann .lab,.film figure,.ruler .ev,.ficha .grp,.steps li,.sc .card{opacity:1!important;transform:none!important}.hpin{opacity:1!important}.ann .ld{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -308,6 +309,7 @@ footer .atop{display:grid;gap:10px}
     <div class="hpin p1"><span>Alojamento e casa</span></div>
     <div class="hpin p2"><span>Pátios prontos<small>terraplenados e cascalhados</small></span></div>
     <div class="hpin p3"><span>Operação industrial vizinha</span></div>
+    <div class="hpin p4"><span>Poço artesiano</span></div>
   </div></div>
   <div class="txt"><div class="wrap">
     <div class="tag in1"><i></i>Apresentação reservada · Pouso Alegre, MG</div>
@@ -336,13 +338,15 @@ footer .atop{display:grid;gap:10px}
         <circle class="dot" cx="110" cy="262" r="4"/><path class="ld l1" d="M110 262 L60 215 L14 215"/>
         <circle class="dot" cx="195" cy="155" r="4"/><path class="ld l2" d="M195 155 L240 92 L345 92"/>
         <circle class="dot" cx="250" cy="300" r="4"/><path class="ld l3" d="M250 300 L272 382 L345 382"/>
+      <circle class="dot" cx="113" cy="199" r="4"/><path class="ld l4" d="M113 199 L88 128 L14 128"/>
       </svg>
       <div class="lab a1" style="left:3.9%;top:36.8%">Pátio em L<small>terraplenado e cascalhado</small></div>
       <div class="lab a2" style="right:2.8%;top:10.6%">Alojamento e casa<small>50 pessoas · 9 quartos</small></div>
       <div class="lab a3" style="right:2.8%;top:82.6%">Módulos de 3 a 6 mil m²<small>alugáveis em separado</small></div>
+    <div class="lab a4" style="left:3.9%;top:22%">Poço artesiano</div>
     </div>
   </div>
-  <div class="pat2 ann" style="aspect-ratio:1600/700"><img src="img/aerea-08.jpg" alt="Vista de cima dos pátios em L" style="object-position:50% 60%"><svg viewBox="0 300 1600 700" preserveAspectRatio="none"><circle class="dot" cx="705" cy="669" r="9"/><path class="ld l1" d="M705 669 L640 545 L560 545"/><circle class="dot" cx="922" cy="396" r="9"/><path class="ld l2" d="M922 396 L1000 335 L1170 335"/><circle class="dot" cx="1062" cy="766" r="9"/><path class="ld l3" d="M1062 766 L1130 870 L1240 870"/></svg><div class="lab a1" style="right:65%;top:35%">Pátio em L<small>terraplenado e cascalhado</small></div><div class="lab a2" style="left:73.1%;top:5%">Alojamento e casa<small>50 pessoas · 9 quartos</small></div><div class="lab a3" style="left:77.5%;top:81.4%">Módulos de 3 a 6 mil m²<small>alugáveis em separado</small></div></div>
+  <div class="pat2 ann" style="aspect-ratio:1600/700"><img src="img/aerea-08.jpg" alt="Vista de cima dos pátios em L" style="object-position:50% 60%"><svg viewBox="0 300 1600 700" preserveAspectRatio="none"><circle class="dot" cx="705" cy="669" r="9"/><path class="ld l1" d="M705 669 L640 545 L560 545"/><circle class="dot" cx="922" cy="396" r="9"/><path class="ld l2" d="M922 396 L1000 335 L1170 335"/><circle class="dot" cx="1062" cy="766" r="9"/><path class="ld l3" d="M1062 766 L1130 870 L1240 870"/><circle class="dot" cx="712" cy="510" r="9"/><path class="ld l4" d="M712 510 L660 420 L560 420"/></svg><div class="lab a1" style="right:65%;top:35%">Pátio em L<small>terraplenado e cascalhado</small></div><div class="lab a2" style="left:73.1%;top:5%">Alojamento e casa<small>50 pessoas · 9 quartos</small></div><div class="lab a3" style="left:77.5%;top:81.4%">Módulos de 3 a 6 mil m²<small>alugáveis em separado</small></div><div class="lab a4" style="right:65%;top:17.1%">Poço artesiano</div></div>
   <div class="panel">
     <div class="kicker">O que é</div>
     <h2 class="h2">Não é terreno vazio.</h2>
